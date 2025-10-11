@@ -27,6 +27,12 @@ interface SubjectGrade {
   color: string
 }
 
+interface SubjectDetails {
+  subject: string
+  lastTopic: string
+  homework: string
+}
+
 const todaySchedule: Schedule[] = [
   { time: '09:00', subject: 'Математический анализ', room: 'Ауд. 301', type: 'lecture' },
   { time: '10:45', subject: 'Программирование', room: 'Ауд. 205', type: 'practice' },
@@ -47,9 +53,34 @@ const subjectGrades: SubjectGrade[] = [
   { name: 'Математическая логика', grade: 3.0, credits: 3, color: '#FFB76B' }
 ]
 
+const subjectDetailsData: { [key: string]: SubjectDetails } = {
+  'Математический анализ': {
+    subject: 'Математический анализ',
+    lastTopic: 'Производные высших порядков и правило Лопиталя',
+    homework: 'Решить задачи №12-18 из задачника Демидовича, подготовить конспект по теореме Тейлора'
+  },
+  'Программирование': {
+    subject: 'Программирование',
+    lastTopic: 'Алгоритмы сортировки: QuickSort и MergeSort',
+    homework: 'Реализовать алгоритмы сортировки на Python, написать unit-тесты для проверки корректности'
+  },
+  'Английский язык': {
+    subject: 'Английский язык',
+    lastTopic: 'Present Perfect vs Present Perfect Continuous',
+    homework: 'Упражнения 5-8 на стр. 45-47, написать эссе на тему "My Future Career" (200 слов)'
+  },
+  'Физика': {
+    subject: 'Физика',
+    lastTopic: 'Законы термодинамики и тепловые машины',
+    homework: 'Решить задачи из сборника Иродова №3.1-3.5, подготовиться к лабораторной работе'
+  }
+}
+
 export default function HomePage() {
   const router = useRouter()
   const [showGpaPopup, setShowGpaPopup] = useState(false)
+  const [showSubjectPopup, setShowSubjectPopup] = useState(false)
+  const [selectedSubject, setSelectedSubject] = useState<SubjectDetails | null>(null)
   const currentTime = new Date()
   const currentHour = currentTime.getHours()
   const currentMinute = currentTime.getMinutes()
@@ -63,6 +94,14 @@ export default function HomePage() {
     const totalPoints = subjectGrades.reduce((sum, subject) => sum + (subject.grade * subject.credits), 0)
     const totalCredits = subjectGrades.reduce((sum, subject) => sum + subject.credits, 0)
     return (totalPoints / totalCredits).toFixed(1)
+  }
+
+  const handleScheduleClick = (subject: string) => {
+    const details = subjectDetailsData[subject]
+    if (details) {
+      setSelectedSubject(details)
+      setShowSubjectPopup(true)
+    }
   }
 
   return (
@@ -160,6 +199,9 @@ export default function HomePage() {
                 key={index}
                 className={styles.scheduleItem}
                 whileHover={{ backgroundColor: '#1C1C1E' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleScheduleClick(item.subject)}
+                style={{ cursor: 'pointer' }}
               >
                 <div className={styles.scheduleTime}>
                   <span className={styles.timeText}>{item.time}</span>
@@ -272,9 +314,9 @@ export default function HomePage() {
             {/* Popup */}
             <motion.div
               className={styles.popup}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             >
               <div className={styles.popupHeader}>
@@ -334,6 +376,69 @@ export default function HomePage() {
                   <p className={styles.footerText}>
                     Оценки обновляются автоматически после каждого экзамена
                   </p>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Subject Details Popup */}
+      <AnimatePresence>
+        {showSubjectPopup && selectedSubject && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className={styles.backdrop}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowSubjectPopup(false)}
+            />
+
+            {/* Popup */}
+            <motion.div
+              className={styles.subjectPopup}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            >
+              <div className={styles.popupHeader}>
+                <h2 className={styles.popupTitle}>{selectedSubject.subject}</h2>
+                <motion.button
+                  className={styles.closeButton}
+                  onClick={() => setShowSubjectPopup(false)}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </motion.button>
+              </div>
+
+              <div className={styles.popupContent}>
+                {/* Last Topic */}
+                <div className={styles.detailSection}>
+                  <div className={styles.detailHeader}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M4 6H16M4 10H16M4 14H12" stroke="#0A84FF" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                    <h3 className={styles.detailTitle}>Последняя тема</h3>
+                  </div>
+                  <p className={styles.detailText}>{selectedSubject.lastTopic}</p>
+                </div>
+
+                {/* Homework */}
+                <div className={styles.detailSection}>
+                  <div className={styles.detailHeader}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <rect x="4" y="4" width="12" height="12" rx="2" stroke="#C8FF00" strokeWidth="2"/>
+                      <path d="M7 10L9 12L13 8" stroke="#C8FF00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <h3 className={styles.detailTitle}>Домашнее задание</h3>
+                  </div>
+                  <p className={styles.detailText}>{selectedSubject.homework}</p>
                 </div>
               </div>
             </motion.div>
