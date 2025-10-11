@@ -237,7 +237,11 @@ export default function ServicesPage() {
           </svg>
         </motion.button>
 
-        <motion.button className={styles.navButton} whileTap={{ scale: 0.9 }}>
+        <motion.button
+          className={styles.navButton}
+          onClick={() => router.push('/calendar')}
+          whileTap={{ scale: 0.9 }}
+        >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
             <rect x="6" y="6" width="6" height="6" stroke="#8E8E93" strokeWidth="2"/>
             <rect x="16" y="6" width="6" height="6" stroke="#8E8E93" strokeWidth="2"/>
@@ -249,4 +253,3 @@ export default function ServicesPage() {
     </div>
   )
 }
-

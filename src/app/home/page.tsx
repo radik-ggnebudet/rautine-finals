@@ -288,7 +288,11 @@ export default function HomePage() {
           </svg>
         </motion.button>
 
-        <motion.button className={styles.navButton} whileTap={{ scale: 0.9 }}>
+        <motion.button
+          className={styles.navButton}
+          onClick={() => router.push('/calendar')}
+          whileTap={{ scale: 0.9 }}
+        >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
             <rect x="6" y="6" width="6" height="6" stroke="#8E8E93" strokeWidth="2"/>
             <rect x="16" y="6" width="6" height="6" stroke="#8E8E93" strokeWidth="2"/>
@@ -312,73 +316,75 @@ export default function HomePage() {
             />
 
             {/* Popup */}
-            <motion.div
-              className={styles.popup}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            >
-              <div className={styles.popupHeader}>
-                <h2 className={styles.popupTitle}>Детализация оценок</h2>
-                <motion.button
-                  className={styles.closeButton}
-                  onClick={() => setShowGpaPopup(false)}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </motion.button>
-              </div>
-
-              <div className={styles.popupContent}>
-                {/* Overall GPA */}
-                <div className={styles.overallGpa}>
-                  <div className={styles.overallGpaLeft}>
-                    <span className={styles.overallGpaLabel}>Средний балл</span>
-                    <span className={styles.overallGpaValue}>{calculateGPA()}</span>
-                  </div>
-                  <div className={styles.overallGpaRight}>
-                    <span className={styles.totalCredits}>{subjectGrades.reduce((sum, s) => sum + s.credits, 0)} кредитов</span>
-                  </div>
+            <div className={styles.popupWrapper}>
+              <motion.div
+                className={styles.popup}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              >
+                <div className={styles.popupHeader}>
+                  <h2 className={styles.popupTitle}>Детализация оценок</h2>
+                  <motion.button
+                    className={styles.closeButton}
+                    onClick={() => setShowGpaPopup(false)}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </motion.button>
                 </div>
 
-                {/* Subjects List */}
-                <div className={styles.subjectsList}>
-                  {subjectGrades.map((subject, index) => (
-                    <motion.div
-                      key={index}
-                      className={styles.subjectItem}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <div className={styles.subjectLeft}>
-                        <div
-                          className={styles.subjectColorDot}
-                          style={{ background: subject.color }}
-                        />
-                        <div className={styles.subjectInfo}>
-                          <h4 className={styles.subjectName}>{subject.name}</h4>
-                          <p className={styles.subjectCredits}>{subject.credits} кредитов</p>
+                <div className={styles.popupContent}>
+                  {/* Overall GPA */}
+                  <div className={styles.overallGpa}>
+                    <div className={styles.overallGpaLeft}>
+                      <span className={styles.overallGpaLabel}>Средний балл</span>
+                      <span className={styles.overallGpaValue}>{calculateGPA()}</span>
+                    </div>
+                    <div className={styles.overallGpaRight}>
+                      <span className={styles.totalCredits}>{subjectGrades.reduce((sum, s) => sum + s.credits, 0)} кредитов</span>
+                    </div>
+                  </div>
+
+                  {/* Subjects List */}
+                  <div className={styles.subjectsList}>
+                    {subjectGrades.map((subject, index) => (
+                      <motion.div
+                        key={index}
+                        className={styles.subjectItem}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <div className={styles.subjectLeft}>
+                          <div
+                            className={styles.subjectColorDot}
+                            style={{ background: subject.color }}
+                          />
+                          <div className={styles.subjectInfo}>
+                            <h4 className={styles.subjectName}>{subject.name}</h4>
+                            <p className={styles.subjectCredits}>{subject.credits} кредитов</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className={styles.subjectGrade} style={{ color: subject.color }}>
-                        {subject.grade.toFixed(1)}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                        <div className={styles.subjectGrade} style={{ color: subject.color }}>
+                          {subject.grade.toFixed(1)}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
 
-                {/* Footer Info */}
-                <div className={styles.popupFooter}>
-                  <p className={styles.footerText}>
-                    Оценки обновляются автоматически после каждого экзамена
-                  </p>
+                  {/* Footer Info */}
+                  <div className={styles.popupFooter}>
+                    <p className={styles.footerText}>
+                      Оценки обновляются автоматически после каждого экзамена
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
@@ -397,51 +403,53 @@ export default function HomePage() {
             />
 
             {/* Popup */}
-            <motion.div
-              className={styles.subjectPopup}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            >
-              <div className={styles.popupHeader}>
-                <h2 className={styles.popupTitle}>{selectedSubject.subject}</h2>
-                <motion.button
-                  className={styles.closeButton}
-                  onClick={() => setShowSubjectPopup(false)}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </motion.button>
-              </div>
-
-              <div className={styles.popupContent}>
-                {/* Last Topic */}
-                <div className={styles.detailSection}>
-                  <div className={styles.detailHeader}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M4 6H16M4 10H16M4 14H12" stroke="#0A84FF" strokeWidth="2" strokeLinecap="round"/>
+            <div className={styles.popupWrapper}>
+              <motion.div
+                className={styles.subjectPopup}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              >
+                <div className={styles.popupHeader}>
+                  <h2 className={styles.popupTitle}>{selectedSubject.subject}</h2>
+                  <motion.button
+                    className={styles.closeButton}
+                    onClick={() => setShowSubjectPopup(false)}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                    <h3 className={styles.detailTitle}>Последняя тема</h3>
-                  </div>
-                  <p className={styles.detailText}>{selectedSubject.lastTopic}</p>
+                  </motion.button>
                 </div>
 
-                {/* Homework */}
-                <div className={styles.detailSection}>
-                  <div className={styles.detailHeader}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <rect x="4" y="4" width="12" height="12" rx="2" stroke="#C8FF00" strokeWidth="2"/>
-                      <path d="M7 10L9 12L13 8" stroke="#C8FF00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <h3 className={styles.detailTitle}>Домашнее задание</h3>
+                <div className={styles.popupContent}>
+                  {/* Last Topic */}
+                  <div className={styles.detailSection}>
+                    <div className={styles.detailHeader}>
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 6H16M4 10H16M4 14H12" stroke="#0A84FF" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                      <h3 className={styles.detailTitle}>Последняя тема</h3>
+                    </div>
+                    <p className={styles.detailText}>{selectedSubject.lastTopic}</p>
                   </div>
-                  <p className={styles.detailText}>{selectedSubject.homework}</p>
+
+                  {/* Homework */}
+                  <div className={styles.detailSection}>
+                    <div className={styles.detailHeader}>
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="4" y="4" width="12" height="12" rx="2" stroke="#C8FF00" strokeWidth="2"/>
+                        <path d="M7 10L9 12L13 8" stroke="#C8FF00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <h3 className={styles.detailTitle}>Домашнее задание</h3>
+                    </div>
+                    <p className={styles.detailText}>{selectedSubject.homework}</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
