@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: #000000;
@@ -19,15 +23,133 @@ button {
   background: none;
   cursor: pointer;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 2px solid #0A84FF;
+  outline-offset: 2px;
 }
 
 input {
   font-family: inherit;
   outline: none;
+  -webkit-appearance: none;
+}
+
+input:focus-visible {
+  outline: 2px solid #0A84FF;
+  outline-offset: 2px;
 }
 
 ::-webkit-scrollbar {
-  width: 0;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
   background: transparent;
 }
 
+::-webkit-scrollbar-thumb {
+  background: #2C2C2E;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3A3C;
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton {
+  animation: shimmer 1.2s ease-in-out infinite;
+  background: linear-gradient(
+    to right,
+    #1C1C1E 0%,
+    #2C2C2E 20%,
+    #1C1C1E 40%,
+    #1C1C1E 100%
+  );
+  background-size: 800px 104px;
+}
+
+/* Smooth Transitions */
+* {
+  transition-property: none;
+  transition-duration: 0s;
+  transition-timing-function: ease;
+}
+
+button,
+a,
+input,
+[role="button"] {
+  transition-property: transform, opacity, background, color, border-color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ripple Effect */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* Selection */
+::selection {
+  background: rgba(10, 132, 255, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: rgba(10, 132, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Focus States */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #0A84FF;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: light) {
+  /* Если нужна светлая тема в будущем */
+}

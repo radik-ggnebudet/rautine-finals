@@ -1,0 +1,526 @@
+.container {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 54px 20px 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+  backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 10;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #8E8E93;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.iconButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.iconButton:hover::before {
+  opacity: 1;
+}
+
+.iconButton:hover {
+  transform: scale(1.1);
+}
+
+.iconButton:active {
+  transform: scale(0.95);
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #1C1C1E 0%, #252527 100%);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8E8E93;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.filterButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.filterButton:hover::before {
+  opacity: 1;
+}
+
+.filterButton:hover {
+  background: linear-gradient(135deg, #2C2C2E 0%, #353537 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.filterButton.active {
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  color: #ffffff;
+  border-color: #0A84FF;
+  box-shadow: 0 4px 16px rgba(10, 132, 255, 0.4);
+}
+
+.filterIcon {
+  font-size: 16px;
+}
+
+.filterLabel {
+  font-size: 14px;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 100px;
+}
+
+/* Post Card */
+.postCard {
+  background: linear-gradient(135deg, #1C1C1E 0%, #1a1a1c 100%);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.postCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.postCard:hover::before {
+  opacity: 1;
+}
+
+.postCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Post Header */
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.authorInfo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.authorDetails {
+  flex: 1;
+}
+
+.authorName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.roleBadge {
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.postTime {
+  font-size: 13px;
+  color: #8E8E93;
+}
+
+.moreButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.moreButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Post Content */
+.postContent {
+  margin-bottom: 12px;
+}
+
+.postText {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #E5E5E7;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  padding: 4px 10px;
+  background: rgba(10, 132, 255, 0.15);
+  border: 1px solid rgba(10, 132, 255, 0.3);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0A84FF;
+  backdrop-filter: blur(10px);
+}
+
+/* Attachments */
+.attachments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.attachment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.attachment:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.attachmentIcon {
+  font-size: 20px;
+}
+
+.attachmentName {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Post Actions */
+.postActions {
+  display: flex;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8E8E93;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.actionButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.actionButton.liked {
+  color: #FF453A;
+}
+
+.actionButton.liked svg {
+  animation: heartBeat 0.3s ease;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-size: 15px;
+  color: #8E8E93;
+  line-height: 1.5;
+}
+
+/* Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: 120px;
+  right: calc(50% - 195px);
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(10, 132, 255, 0.5), 0 0 40px rgba(10, 132, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 15;
+}
+
+.fab::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+}
+
+.fab:hover::before {
+  opacity: 0.6;
+}
+
+.fab:hover {
+  background: linear-gradient(135deg, #0099FF 0%, #0077DD 100%);
+  box-shadow: 0 6px 28px rgba(10, 132, 255, 0.6), 0 0 50px rgba(10, 132, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+/* Bottom Navigation */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 20px 34px;
+  background: linear-gradient(to top, #000000 80%, transparent);
+  backdrop-filter: blur(20px);
+  z-index: 20;
+}
+
+.navButton {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.navButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navButton:hover::before {
+  opacity: 1;
+}
+
+.navButton:hover {
+  transform: scale(1.1);
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+.navButton.active {
+  background: rgba(10, 132, 255, 0.2);
+  box-shadow: 0 0 20px rgba(10, 132, 255, 0.3);
+}
+
+.navButtonCenter {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(10, 132, 255, 0.5), 0 0 40px rgba(10, 132, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.navButtonCenter::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+}
+
+.navButtonCenter:hover::before {
+  opacity: 0.6;
+}
+
+.navButtonCenter:hover {
+  background: linear-gradient(135deg, #0099FF 0%, #0077DD 100%);
+  box-shadow: 0 6px 28px rgba(10, 132, 255, 0.6), 0 0 50px rgba(10, 132, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.navButtonCenter:active {
+  transform: scale(0.95);
+}
+
+/* Responsive */
+@media (max-width: 430px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .fab {
+    right: 20px;
+  }
+}
+

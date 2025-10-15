@@ -3,7 +3,7 @@
   max-width: 430px;
   height: 100vh;
   margin: 0 auto;
-  background: #000000;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -16,6 +16,8 @@
   justify-content: space-between;
   padding: 54px 20px 16px;
   border-bottom: 1px solid #1C1C1E;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+  backdrop-filter: blur(20px);
 }
 
 .backButton {
@@ -25,11 +27,30 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.backButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.backButton:hover::before {
+  opacity: 1;
 }
 
 .backButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.backButton:active {
+  transform: scale(0.95);
 }
 
 .title {
@@ -45,11 +66,30 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.iconButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.iconButton:hover::before {
+  opacity: 1;
 }
 
 .iconButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.iconButton:active {
+  transform: scale(0.95);
 }
 
 /* Week Tabs */
@@ -68,27 +108,52 @@
 .dayTab {
   min-width: 56px;
   padding: 12px 8px;
-  background: #1C1C1E;
+  background: linear-gradient(135deg, #1C1C1E 0%, #252527 100%);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid transparent;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.dayTab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dayTab:hover::before {
+  opacity: 1;
 }
 
 .dayTab:hover {
-  background: #2C2C2E;
+  background: linear-gradient(135deg, #2C2C2E 0%, #353537 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .dayTab.active {
-  background: #0A84FF;
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
   border-color: #0A84FF;
+  box-shadow: 0 4px 16px rgba(10, 132, 255, 0.4);
+  transform: translateY(-2px);
 }
 
 .dayTab.today {
   border-color: #C8FF00;
+  box-shadow: 0 4px 16px rgba(200, 255, 0, 0.2);
+}
+
+.dayTab.active.today {
+  box-shadow: 0 4px 16px rgba(10, 132, 255, 0.4), 0 0 0 3px rgba(200, 255, 0, 0.2);
 }
 
 .dayName {
@@ -149,10 +214,37 @@
 .classItem {
   display: flex;
   gap: 16px;
-  background: #1C1C1E;
+  background: linear-gradient(135deg, #1C1C1E 0%, #1a1a1c 100%);
   border-radius: 16px;
   padding: 16px;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.classItem::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.classItem:hover::before {
+  opacity: 1;
+}
+
+.classItem:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.classItem:active {
+  transform: translateY(-2px) scale(1.01);
 }
 
 .timeColumn {
@@ -168,6 +260,7 @@
   font-weight: 600;
   color: #ffffff;
   white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .timeDot {
@@ -175,14 +268,28 @@
   height: 12px;
   border-radius: 50%;
   flex-shrink: 0;
+  box-shadow: 0 0 12px currentColor, 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
 }
 
 .timeLine {
   flex: 1;
   width: 2px;
-  background: #2C2C2E;
+  background: linear-gradient(to bottom, #2C2C2E 0%, transparent 100%);
   border-radius: 1px;
   min-height: 20px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 .classContent {
@@ -213,21 +320,26 @@
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .classType.lecture {
-  background: rgba(10, 132, 255, 0.2);
+  background: rgba(10, 132, 255, 0.25);
   color: #0A84FF;
+  border: 1px solid rgba(10, 132, 255, 0.3);
 }
 
 .classType.practice {
-  background: rgba(200, 255, 0, 0.2);
+  background: rgba(200, 255, 0, 0.25);
   color: #C8FF00;
+  border: 1px solid rgba(200, 255, 0, 0.3);
 }
 
 .classType.exam {
-  background: rgba(255, 107, 159, 0.2);
+  background: rgba(255, 107, 159, 0.25);
   color: #FF6B9F;
+  border: 1px solid rgba(255, 107, 159, 0.3);
 }
 
 .classInfo {
@@ -251,10 +363,18 @@
   text-align: center;
 }
 
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
 .emptyText {
   font-size: 16px;
   color: #8E8E93;
   margin-top: 16px;
+  line-height: 1.5;
 }
 
 /* Bottom Navigation */
@@ -270,6 +390,7 @@
   align-items: center;
   padding: 12px 20px 34px;
   background: linear-gradient(to top, #000000 80%, transparent);
+  backdrop-filter: blur(20px);
   z-index: 20;
 }
 
@@ -280,15 +401,35 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.navButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navButton:hover::before {
+  opacity: 1;
 }
 
 .navButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.navButton:active {
+  transform: scale(0.95);
 }
 
 .navButton.active {
-  background: rgba(10, 132, 255, 0.15);
+  background: rgba(10, 132, 255, 0.2);
+  box-shadow: 0 0 20px rgba(10, 132, 255, 0.3);
 }
 
 .navButtonCenter {
@@ -299,13 +440,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(10, 132, 255, 0.4);
-  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(10, 132, 255, 0.5), 0 0 40px rgba(10, 132, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.navButtonCenter::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+}
+
+.navButtonCenter:hover::before {
+  opacity: 0.6;
 }
 
 .navButtonCenter:hover {
   background: linear-gradient(135deg, #0099FF 0%, #0077DD 100%);
-  box-shadow: 0 6px 24px rgba(10, 132, 255, 0.5);
+  box-shadow: 0 6px 28px rgba(10, 132, 255, 0.6), 0 0 50px rgba(10, 132, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.navButtonCenter:active {
+  transform: scale(0.95);
 }
 
 /* Responsive */
@@ -314,4 +476,3 @@
     max-width: 100%;
   }
 }
-

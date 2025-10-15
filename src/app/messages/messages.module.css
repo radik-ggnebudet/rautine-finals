@@ -3,7 +3,7 @@
   max-width: 430px;
   height: 100vh;
   margin: 0 auto;
-  background: #000000;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -18,6 +18,8 @@
   padding: 54px 20px 20px;
   position: relative;
   z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+  backdrop-filter: blur(20px);
 }
 
 .title {
@@ -38,11 +40,30 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.iconButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.iconButton:hover::before {
+  opacity: 1;
 }
 
 .iconButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.iconButton:active {
+  transform: scale(0.95);
 }
 
 /* Search */
@@ -54,16 +75,20 @@
 .searchInput {
   width: 100%;
   padding: 12px 40px 12px 16px;
-  background: #1C1C1E;
-  border: none;
+  background: linear-gradient(135deg, #1C1C1E 0%, #252527 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   color: #ffffff;
   font-size: 17px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .searchInput:focus {
-  background: #2C2C2E;
+  background: linear-gradient(135deg, #2C2C2E 0%, #353537 100%);
+  border-color: #0A84FF;
+  box-shadow: 0 4px 16px rgba(10, 132, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 .searchInput::placeholder {
@@ -79,6 +104,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s;
+}
+
+.clearButton:hover {
+  transform: scale(1.1);
+}
+
+.clearButton:active {
+  transform: scale(0.9);
 }
 
 /* Sidebar */
@@ -109,11 +143,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.iconCircle::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+}
+
+.sidebarButton:hover .iconCircle::before {
+  opacity: 0.6;
 }
 
 .sidebarButton:hover .iconCircle {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.sidebarButton:active .iconCircle {
+  transform: scale(0.95);
 }
 
 .notificationBadge {
@@ -122,7 +178,7 @@
   right: 0;
   width: 24px;
   height: 24px;
-  background: #2C2C2E;
+  background: linear-gradient(135deg, #FF453A 0%, #CC0000 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -131,12 +187,23 @@
   font-weight: 600;
   color: #ffffff;
   border: 2px solid #000000;
+  box-shadow: 0 2px 8px rgba(255, 69, 58, 0.5);
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 /* Messages Section */
 .messagesSection {
   flex: 1;
-  background: #000000;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
   border-radius: 24px 24px 0 0;
   overflow: hidden;
   display: flex;
@@ -363,4 +430,3 @@
     max-width: 100%;
   }
 }
-

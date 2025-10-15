@@ -3,7 +3,7 @@
   max-width: 430px;
   height: 100vh;
   margin: 0 auto;
-  background: #000000;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -15,6 +15,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 54px 20px 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+  backdrop-filter: blur(20px);
 }
 
 .greeting {
@@ -36,21 +38,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.profileButton::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0A84FF, #C8FF00);
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity 0.3s ease;
+}
+
+.profileButton:hover::before {
+  opacity: 0.6;
 }
 
 .profileButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.profileButton:active {
+  transform: scale(0.95);
 }
 
 .avatar {
   width: 48px;
   height: 48px;
-  background: #2C2C2E;
+  background: linear-gradient(135deg, #2C2C2E 0%, #1C1C1E 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Content */
@@ -67,13 +91,34 @@
   padding: 24px;
   margin-bottom: 20px;
   border: 2px solid #C8FF00;
+  box-shadow: 0 8px 32px rgba(200, 255, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
-.gpaHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
+.gpaCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200, 255, 0, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gpaCard:hover::before {
+  opacity: 1;
+}
+
+.gpaCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(200, 255, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-color: #d4ff33;
+}
+
+.gpaCard:active {
+  transform: translateY(-2px);
 }
 
 .gpaLabel {
@@ -87,6 +132,7 @@
   font-weight: 700;
   color: #C8FF00;
   line-height: 1;
+  text-shadow: 0 4px 12px rgba(200, 255, 0, 0.3);
 }
 
 .gpaIcon {
@@ -101,10 +147,39 @@
 
 /* Next Class Card */
 .nextClassCard {
-  background: #1C1C1E;
+  background: linear-gradient(135deg, #1C1C1E 0%, #252527 100%);
   border-radius: 16px;
   padding: 20px;
   margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.nextClassCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nextClassCard:hover::before {
+  opacity: 1;
+}
+
+.nextClassCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.nextClassCard:active {
+  transform: translateY(-2px);
 }
 
 .cardHeader {
@@ -124,11 +199,13 @@
 
 .badge {
   padding: 4px 10px;
-  background: #0A84FF;
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
   border-radius: 8px;
   font-size: 11px;
   font-weight: 600;
   color: #ffffff;
+  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .subjectName {
@@ -136,6 +213,7 @@
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .classInfo {

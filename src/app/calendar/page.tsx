@@ -218,7 +218,11 @@ export default function CalendarPage() {
           </svg>
         </motion.button>
 
-        <motion.button className={styles.navButton} whileTap={{ scale: 0.9 }}>
+        <motion.button
+          className={styles.navButton}
+          onClick={() => router.push('/feed')}
+          whileTap={{ scale: 0.9 }}
+        >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
             <path d="M8 4L18 14L8 24M10 14L20 4L20 24L10 14Z" fill="#8E8E93"/>
           </svg>
@@ -239,4 +243,3 @@ export default function CalendarPage() {
     </div>
   )
 }
-
