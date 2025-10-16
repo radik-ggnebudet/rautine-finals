@@ -1,0 +1,481 @@
+.container {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 54px 20px 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+  backdrop-filter: blur(20px);
+}
+
+.backButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.backButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.backButton:hover::before {
+  opacity: 1;
+}
+
+.backButton:hover {
+  transform: scale(1.1);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 40px;
+}
+
+/* Section */
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+/* Themes Grid */
+.themesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.themeCard {
+  background: linear-gradient(135deg, #1C1C1E 0%, #1a1a1c 100%);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.themeCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.themeCard.active {
+  border-color: #0A84FF;
+  box-shadow: 0 4px 20px rgba(10, 132, 255, 0.4);
+}
+
+.themePreview {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.previewHeader {
+  height: 20px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+}
+
+.previewDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.previewContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.previewCard {
+  height: 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.themeInfo {
+  text-align: center;
+}
+
+.themeName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.themeDescription {
+  font-size: 11px;
+  color: #8E8E93;
+  line-height: 1.3;
+}
+
+.activeCheck {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: #0A84FF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.4);
+}
+
+/* Colors Grid */
+.colorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.colorCard {
+  background: linear-gradient(135deg, #1C1C1E 0%, #1a1a1c 100%);
+  border-radius: 16px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.colorCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.colorCard.active {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.colorCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.colorCard:hover .colorCircle {
+  transform: scale(1.1);
+}
+
+.colorName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Preview Section */
+.previewSection {
+  background: linear-gradient(135deg, #1C1C1E 0%, #1a1a1c 100%);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.previewExample {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exampleHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.exampleAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2C2C2E 0%, #3A3A3C 100%);
+  flex-shrink: 0;
+}
+
+.exampleText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exampleTitle {
+  height: 12px;
+  width: 120px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+.exampleSubtitle {
+  height: 10px;
+  width: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.exampleCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exampleCardHeader {
+  height: 10px;
+  width: 100px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+}
+
+.exampleCardContent {
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.exampleButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.exampleButton {
+  flex: 1;
+  height: 40px;
+  border-radius: 12px;
+}
+
+/* Info Box */
+.infoBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(10, 132, 255, 0.1);
+  border: 1px solid rgba(10, 132, 255, 0.3);
+  border-radius: 12px;
+  margin-top: 24px;
+}
+
+.infoText {
+  font-size: 13px;
+  color: #E5E5E7;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 430px) {
+  .container {
+    max-width: 100%;
+  }
+}
+'use client'
+
+import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import styles from './themes.module.css'
+
+const themes = [
+  { id: 'dark', name: 'Темная', description: 'Классическая темная тема', bg: '#000000', card: '#1C1C1E', text: '#FFFFFF' },
+  { id: 'light', name: 'Светлая', description: 'Комфортная для дневного использования', bg: '#FFFFFF', card: '#F2F2F7', text: '#000000' },
+  { id: 'amoled', name: 'AMOLED', description: 'Абсолютно черный фон', bg: '#000000', card: '#0A0A0A', text: '#FFFFFF' }
+]
+
+const accentColors = [
+  { id: 'blue', name: 'Синий', color: '#0A84FF', gradient: 'linear-gradient(135deg, #0A84FF 0%, #0066CC 100%)' },
+  { id: 'green', name: 'Зеленый', color: '#30D158', gradient: 'linear-gradient(135deg, #30D158 0%, #28a745 100%)' },
+  { id: 'purple', name: 'Фиолетовый', color: '#8B7FFF', gradient: 'linear-gradient(135deg, #8B7FFF 0%, #6B5FDF 100%)' },
+  { id: 'pink', name: 'Розовый', color: '#FF6B9F', gradient: 'linear-gradient(135deg, #FF6B9F 0%, #FF4585 100%)' },
+  { id: 'orange', name: 'Оранжевый', color: '#FFB76B', gradient: 'linear-gradient(135deg, #FFB76B 0%, #FF9F4A 100%)' }
+]
+
+export default function ThemesPage() {
+  const router = useRouter()
+
+  return (
+    <div className={styles.container}>
+      {/* Header */}
+      <header className={styles.header}>
+        <motion.button
+          className={styles.backButton}
+          onClick={() => router.back()}
+          whileTap={{ scale: 0.95 }}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </motion.button>
+        <h1 className={styles.title}>Темы оформления</h1>
+        <div style={{ width: 40 }} />
+      </header>
+
+      <div className={styles.content}>
+        {/* Theme Selection */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>🎨 Основная тема</h2>
+          <div className={styles.themesGrid}>
+            {themes.map((theme, index) => (
+              <motion.div
+                key={theme.id}
+                className={`${styles.themeCard} ${theme.id === 'dark' ? styles.active : ''}`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className={styles.themePreview} style={{ background: theme.bg }}>
+                  <div className={styles.previewHeader} style={{ background: theme.card }}>
+                    <div className={styles.previewDot} />
+                    <div className={styles.previewDot} />
+                    <div className={styles.previewDot} />
+                  </div>
+                  <div className={styles.previewContent}>
+                    <div className={styles.previewCard} style={{ background: theme.card }} />
+                    <div className={styles.previewCard} style={{ background: theme.card }} />
+                  </div>
+                </div>
+                <div className={styles.themeInfo}>
+                  <h3 className={styles.themeName}>{theme.name}</h3>
+                  <p className={styles.themeDescription}>{theme.description}</p>
+                </div>
+                {theme.id === 'dark' && (
+                  <div className={styles.activeCheck}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8L6 11L13 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Accent Colors */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>🌈 Акцентный цвет</h2>
+          <div className={styles.colorsGrid}>
+            {accentColors.map((color, index) => (
+              <motion.div
+                key={color.id}
+                className={`${styles.colorCard} ${color.id === 'blue' ? styles.active : ''}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + index * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div
+                  className={styles.colorCircle}
+                  style={{ background: color.gradient }}
+                />
+                <span className={styles.colorName}>{color.name}</span>
+                {color.id === 'blue' && (
+                  <div className={styles.activeCheck}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8L6 11L13 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Preview Section */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>👀 Предпросмотр</h2>
+          <div className={styles.previewSection}>
+            <div className={styles.previewExample}>
+              <div className={styles.exampleHeader}>
+                <div className={styles.exampleAvatar} />
+                <div className={styles.exampleText}>
+                  <div className={styles.exampleTitle} />
+                  <div className={styles.exampleSubtitle} />
+                </div>
+              </div>
+              <div className={styles.exampleCard}>
+                <div className={styles.exampleCardHeader} />
+                <div className={styles.exampleCardContent} />
+              </div>
+              <div className={styles.exampleButtons}>
+                <div className={styles.exampleButton} style={{ background: 'linear-gradient(135deg, #0A84FF 0%, #0066CC 100%)' }} />
+                <div className={styles.exampleButton} style={{ background: 'rgba(255, 255, 255, 0.05)' }} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Info */}
+        <div className={styles.infoBox}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="8" stroke="#0A84FF" strokeWidth="2"/>
+            <path d="M10 14V10M10 6V6.5" stroke="#0A84FF" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+          <p className={styles.infoText}>
+            Изменения применятся сразу после выбора темы
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+

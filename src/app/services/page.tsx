@@ -10,6 +10,7 @@ interface Service {
   icon: string
   color: string
   description: string
+  route?: string
 }
 
 const services: Service[] = [
@@ -18,63 +19,67 @@ const services: Service[] = [
     title: 'Библиотека',
     icon: '📚',
     color: '#FF6B9F',
-    description: 'Каталог и бронирование книг'
+    description: 'Каталог и бронирование книг',
+    route: '/library'
   },
   {
     id: 2,
+    title: 'Домашние задания',
+    icon: '✅',
+    color: '#30D158',
+    description: 'Трекер заданий и дедлайнов',
+    route: '/homework'
+  },
+  {
+    id: 3,
+    title: 'Уведомления',
+    icon: '🔔',
+    color: '#0A84FF',
+    description: 'Все оповещения в одном месте',
+    route: '/notifications'
+  },
+  {
+    id: 4,
+    title: 'Темы',
+    icon: '🎨',
+    color: '#8B7FFF',
+    description: 'Персонализация интерфейса',
+    route: '/themes'
+  },
+  {
+    id: 5,
     title: 'Столовая',
     icon: '🍽️',
     color: '#FFB76B',
     description: 'Меню и заказ еды'
   },
   {
-    id: 3,
+    id: 6,
     title: 'Спорт',
     icon: '⚽',
-    color: '#0A84FF',
+    color: '#00D4FF',
     description: 'Расписание тренировок'
   },
   {
-    id: 4,
+    id: 7,
     title: 'Транспорт',
     icon: '🚌',
-    color: '#30D158',
+    color: '#C8FF00',
     description: 'Расписание автобусов'
   },
   {
-    id: 5,
+    id: 8,
     title: 'Документы',
     icon: '📄',
-    color: '#8B7FFF',
+    color: '#FF9F0A',
     description: 'Справки и заявления'
   },
   {
-    id: 6,
-    title: 'Оплата',
-    icon: '💳',
-    color: '#FF453A',
-    description: 'Оплата обучения'
-  },
-  {
-    id: 7,
+    id: 9,
     title: 'Карьера',
     icon: '💼',
-    color: '#C8FF00',
+    color: '#FF453A',
     description: 'Вакансии и стажировки'
-  },
-  {
-    id: 8,
-    title: 'Поддержка',
-    icon: '💬',
-    color: '#00D4FF',
-    description: 'Техподдержка'
-  },
-  {
-    id: 9,
-    title: 'Карта',
-    icon: '🗺️',
-    color: '#FF9F0A',
-    description: 'Карта кампуса'
   }
 ]
 
@@ -112,6 +117,8 @@ export default function ServicesPage() {
               transition={{ delay: index * 0.05 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => service.route && router.push(service.route)}
+              style={{ cursor: service.route ? 'pointer' : 'default' }}
             >
               <div className={styles.serviceIcon} style={{ background: service.color }}>
                 <span className={styles.emoji}>{service.icon}</span>
@@ -226,8 +233,10 @@ export default function ServicesPage() {
           whileHover={{ scale: 1.05 }}
         >
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="14" y="8" width="4" height="16" fill="white"/>
-            <rect x="8" y="14" width="16" height="4" fill="white"/>
+            <rect x="8" y="8" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="18" y="8" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="8" y="18" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="18" y="18" width="6" height="6" rx="1.5" fill="white"/>
           </svg>
         </motion.button>
 

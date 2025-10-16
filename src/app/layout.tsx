@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { ThemeProvider } from '@/contexts/ThemeContext'
+import OfflineIndicator from '@/components/OfflineIndicator'
 
 export const metadata: Metadata = {
   title: 'Rautine',
@@ -13,8 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>
+          {children}
+          <OfflineIndicator />
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
-

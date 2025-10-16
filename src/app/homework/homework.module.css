@@ -1,0 +1,453 @@
+.container {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a0a 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 54px 20px 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+  backdrop-filter: blur(20px);
+}
+
+.backButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.backButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.backButton:hover::before {
+  opacity: 1;
+}
+
+.backButton:hover {
+  transform: scale(1.1);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 16px;
+}
+
+.filterButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #1C1C1E 0%, #252527 100%);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8E8E93;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+}
+
+.filterButton.active {
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  color: #ffffff;
+  border-color: #0A84FF;
+  box-shadow: 0 4px 16px rgba(10, 132, 255, 0.4);
+}
+
+.filterCount {
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 120px;
+}
+
+/* Homework Card */
+.homeworkCard {
+  background: linear-gradient(135deg, #1C1C1E 0%, #1a1a1c 100%);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.homeworkCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.homeworkCard:hover::before {
+  opacity: 1;
+}
+
+.homeworkCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.homeworkCard.completed {
+  opacity: 0.7;
+}
+
+.cardHeader {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.priorityBadge,
+.deadlineBadge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.cardSubject {
+  font-size: 13px;
+  color: #8E8E93;
+  margin-bottom: 12px;
+}
+
+.progressSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.progressBar {
+  flex: 1;
+  height: 6px;
+  background: #2C2C2E;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8E8E93;
+  min-width: 40px;
+  text-align: right;
+}
+
+.subtasksPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subtaskItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #E5E5E7;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #3A3A3C;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  font-size: 12px;
+}
+
+.checkbox.checked {
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  border-color: #0A84FF;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: #8E8E93;
+}
+
+.moreSubtasks {
+  font-size: 12px;
+  color: #8E8E93;
+  margin-left: 26px;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-size: 15px;
+  color: #8E8E93;
+  line-height: 1.5;
+}
+
+/* FAB */
+.fab {
+  position: fixed;
+  bottom: 120px;
+  right: calc(50% - 195px);
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #FF6B9F 0%, #FF4585 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(255, 107, 159, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 15;
+}
+
+.fab:hover {
+  box-shadow: 0 6px 28px rgba(255, 107, 159, 0.6);
+}
+
+/* Modal */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 101;
+  pointer-events: none;
+}
+
+.modal {
+  width: 100%;
+  max-width: 430px;
+  max-height: 85vh;
+  background: linear-gradient(135deg, #1C1C1E 0%, #252527 100%);
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  flex: 1;
+  padding-right: 12px;
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.modalContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modalInfo {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoLabel {
+  font-size: 14px;
+  color: #8E8E93;
+}
+
+.infoValue {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.infoBadge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.subtasksList {
+  margin-bottom: 20px;
+}
+
+.subtasksTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.subtaskItemLarge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.subtaskItemLarge:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.checkboxLarge {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #3A3A3C;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.checkboxLarge.checked {
+  background: linear-gradient(135deg, #0A84FF 0%, #0066CC 100%);
+  border-color: #0A84FF;
+}
+
+.modalProgress {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Responsive */
+@media (max-width: 430px) {
+  .fab {
+    right: 20px;
+  }
+}
+

@@ -46,10 +46,18 @@ export default function ProfilePage() {
   const [showAchievementPopup, setShowAchievementPopup] = useState(false)
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
   const [showEditPopup, setShowEditPopup] = useState(false)
+  const [editName, setEditName] = useState('Иван Иванов')
+  const [editBio, setEditBio] = useState('Изучаю программирование и люблю математику 📚')
+  const [editStatus, setEditStatus] = useState('👨‍🎓 Студент')
 
   const handleAchievementClick = (achievement: Achievement) => {
     setSelectedAchievement(achievement)
     setShowAchievementPopup(true)
+  }
+
+  const handleSaveProfile = () => {
+    // Здесь можно добавить логику сохранения профиля
+    setShowEditPopup(false)
   }
 
   return (
@@ -120,13 +128,13 @@ export default function ProfilePage() {
             </motion.div>
           </div>
 
-          <h2 className={styles.userName}>Иван Иванов</h2>
+          <h2 className={styles.userName}>{editName}</h2>
           <div className={styles.userRole}>
-            <span className={styles.roleBadge}>Студент</span>
+            <span className={styles.roleBadge}>{editStatus}</span>
             <span className={styles.roleSeparator}>•</span>
             <span className={styles.roleText}>2 курс</span>
           </div>
-          <p className={styles.userBio}>Изучаю программирование и люблю математику 📚</p>
+          <p className={styles.userBio}>{editBio}</p>
         </motion.div>
 
         {/* Stats Cards */}
@@ -232,7 +240,7 @@ export default function ProfilePage() {
               <span className={styles.infoValue}>+7 (999) 123-45-67</span>
             </div>
             <div className={styles.infoRow}>
-              <span className={styles.infoLabel}>Дата рождения</span>
+              <span className={styles.infoLabel}>Дата рождени��</span>
               <span className={styles.infoValue}>15.03.2005</span>
             </div>
             <div className={styles.infoRow}>
@@ -375,7 +383,7 @@ export default function ProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
         >
-          <h3 className={styles.sectionTitle}>📱 Недавняя активность</h3>
+          <h3 className={styles.sectionTitle}>📱 Недавняя активност��</h3>
           <div className={styles.activityList}>
             {recentActivity.map((activity, index) => (
               <motion.div
@@ -466,7 +474,98 @@ export default function ProfilePage() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Edit Profile Modal */}
+      <AnimatePresence>
+        {showEditPopup && (
+          <>
+            <motion.div
+              className={styles.backdrop}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowEditPopup(false)}
+            />
+            <div className={styles.popupWrapper}>
+              <motion.div
+                className={styles.editPopup}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              >
+                <div className={styles.editHeader}>
+                  <h3 className={styles.editTitle}>✏️ Редактировать профиль</h3>
+                  <motion.button
+                    className={styles.closeButton}
+                    onClick={() => setShowEditPopup(false)}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    ✕
+                  </motion.button>
+                </div>
+
+                <div className={styles.editContent}>
+                  <div className={styles.editField}>
+                    <label className={styles.editLabel}>Имя</label>
+                    <input
+                      type="text"
+                      className={styles.editInput}
+                      value={editName}
+                      onChange={(e) => setEditName(e.target.value)}
+                      placeholder="Введите имя"
+                    />
+                  </div>
+
+                  <div className={styles.editField}>
+                    <label className={styles.editLabel}>Биография</label>
+                    <textarea
+                      className={styles.editTextarea}
+                      value={editBio}
+                      onChange={(e) => setEditBio(e.target.value)}
+                      placeholder="Расскажите о себе"
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className={styles.editField}>
+                    <label className={styles.editLabel}>Статус</label>
+                    <div className={styles.statusGrid}>
+                      {['👨‍🎓 Студент', '📚 Учусь', '💻 Кодер', '🎯 В работе', '😴 Отдыхаю'].map(status => (
+                        <motion.button
+                          key={status}
+                          className={`${styles.statusButton} ${editStatus === status ? styles.activeStatus : ''}`}
+                          onClick={() => setEditStatus(status)}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          {status}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.editActions}>
+                  <motion.button
+                    className={styles.cancelButton}
+                    onClick={() => setShowEditPopup(false)}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Отмена
+                  </motion.button>
+                  <motion.button
+                    className={styles.saveButton}
+                    onClick={handleSaveProfile}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Сохранить
+                  </motion.button>
+                </div>
+              </motion.div>
+            </div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
-

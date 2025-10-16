@@ -213,8 +213,10 @@ export default function CalendarPage() {
           whileHover={{ scale: 1.05 }}
         >
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="14" y="8" width="4" height="16" fill="white"/>
-            <rect x="8" y="14" width="16" height="4" fill="white"/>
+            <rect x="8" y="8" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="18" y="8" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="8" y="18" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="18" y="18" width="6" height="6" rx="1.5" fill="white"/>
           </svg>
         </motion.button>
 
